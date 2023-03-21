@@ -1,10 +1,32 @@
+<script>
+import Demo from '@/components/Demo'
+
+export default {
+  name: 'Home',
+  components: {
+    Demo,
+  },
+  data () {
+            return {
+                time: (new Date()).getTime() - 86400 * 3 * 1000
+            }
+  },
+  setup() {
+  },
+  methods: {
+  }
+}
+</script>
+
+
 <template>
   <div class="layout">
     <Layout>
         <Header>
-            <Menu mode="horizontal" theme="dark" active-name="1">
-                <div class="layout-logo"></div>
+            <Menu mode="horizontal" theme="light" active-name="1">
+                <!-- <div class="layout-logo"></div> -->
                 <div class="layout-nav">
+                    <Time :time="time" type="date" />
                     <MenuItem name="1">
                         <Icon type="ios-navigate"></Icon>
                         <router-link to="/LayOut">LayOut</router-link>
@@ -20,7 +42,7 @@
                 </div>
             </Menu>
         </Header>
-        <Layout>
+        <!-- <Layout> -->
             <!-- <Sider hide-trigger :style="{background: '#fff'}">
                 <Menu active-name="1-2" theme="light" width="auto" :open-names="['1']">
                     <Submenu name="1">
@@ -50,7 +72,7 @@
                     </Submenu>
                 </Menu>
             </Sider> -->
-            <Layout :style="{padding: '0 24px 24px'}">
+            <!-- <Layout :style="{padding: '0 24px 24px'}"> -->
                 <!-- <Breadcrumb :style="{margin: '24px 0'}">
                     <BreadcrumbItem>Home</BreadcrumbItem>
                     <BreadcrumbItem>Components</BreadcrumbItem>
@@ -61,26 +83,11 @@
                     <router-view/>
                 </Content> -->
                 <router-view/>
-            </Layout>
-        </Layout>
+            <!-- </Layout> -->
+        <!-- </Layout> -->
     </Layout>
   </div>
 </template>
-
-<script>
-import Demo from '@/components/Demo'
-
-export default {
-  name: 'Home',
-  components: {
-    Demo,
-  },
-  setup() {
-  },
-  methods: {
-  }
-}
-</script>
 
 <style lang="less" scoped>
 .layout{
@@ -93,7 +100,7 @@ export default {
 .layout-logo{
     width: 100px;
     height: 30px;
-    background: #e6e9ee;
+    background: blue;
     border-radius: 3px;
     float: left;
     position: relative;
