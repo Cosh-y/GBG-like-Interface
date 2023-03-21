@@ -4,6 +4,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './styles/index.less'
+import ganttastic from '@infectoone/vue-ganttastic'
 // import './mock'
 
 const app = createApp(App)
@@ -11,4 +12,5 @@ const app = createApp(App)
 app.use(router)
   .use(store)
   .use(ViewUIPlus)
+  .use(ganttastic)
   .mount('#app')
