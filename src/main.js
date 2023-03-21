@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 import './styles/index.less'
 import ganttastic from '@infectoone/vue-ganttastic'
+import draggable from "vuedraggable"
 // import './mock'
 
 const app = createApp(App)
