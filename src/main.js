@@ -4,6 +4,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './styles/index.less'
+import draggable from "vuedraggable"
 // import './mock'
 
 const app = createApp(App)
