@@ -6,6 +6,8 @@ import store from './store'
 import './styles/index.less'
 import ganttastic from '@infectoone/vue-ganttastic'
 import draggable from "vuedraggable"
+import 'vue3-draggable-resizable/dist/Vue3DraggableResizable.css'
+import Vue3DraggableResizable from 'vue3-draggable-resizable'
 // import './mock'
 
 const app = createApp(App)
@@ -14,4 +16,5 @@ app.use(router)
   .use(store)
   .use(ViewUIPlus)
   .use(ganttastic)
+  .use(Vue3DraggableResizable)
   .mount('#app')
