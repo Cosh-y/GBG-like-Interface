@@ -10,6 +10,7 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home,
+    redirect: '/LayOut',
     // 子路由/嵌套路由
     children: [
       {
