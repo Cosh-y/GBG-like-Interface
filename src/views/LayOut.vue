@@ -158,7 +158,10 @@ export default defineComponent({
                     },
                 ],
       model: '',
+      machineName: [],
+      machineNum: [],
       Count:0,
+      OldCount:0,
       Value:false,
       modal:true,
       active: false,
@@ -170,42 +173,80 @@ export default defineComponent({
   methods: {
     Cal() {
       this.Count = 0;
+      this.OldCount = 0;
       this.Count += this.$refs.a.cal();
       this.Count += this.$refs.b.cal();
       this.Count += this.$refs.c.cal();
+      this.machineName.push('MachineArm');
+      this.machineNum.push(this.OldCount-this.Count);
+      this.OldCount = this.Count;
       this.Count += this.$refs.d.cal();
       this.Count += this.$refs.e.cal();
       this.Count += this.$refs.f.cal();
+      this.machineName.push('LiCoNic');
+      this.machineNum.push(this.OldCount-this.Count);
+      this.OldCount = this.Count;
       this.Count += this.$refs.g.cal();
       this.Count += this.$refs.h.cal();
       this.Count += this.$refs.i.cal();
+      this.machineName.push('CommonStore');
+      this.machineNum.push(this.OldCount-this.Count);
+      this.OldCount = this.Count;
       this.Count += this.$refs.j.cal();
       this.Count += this.$refs.k.cal();
       this.Count += this.$refs.l.cal();
+      this.machineName.push('Fliud');
+      this.machineNum.push(this.OldCount-this.Count);
+      this.OldCount = this.Count;
       this.Count += this.$refs.m.cal();
       this.Count += this.$refs.n.cal();
       this.Count += this.$refs.o.cal();
+      this.machineName.push('ATS');
+      this.machineNum.push(this.OldCount-this.Count);
+      this.OldCount = this.Count;
       this.Count += this.$refs.p.cal();
       this.Count += this.$refs.q.cal();
       this.Count += this.$refs.r.cal();
+      this.machineName.push('reagent');
+      this.machineNum.push(this.OldCount-this.Count);
+      this.OldCount = this.Count;
       this.Count += this.$refs.s.cal();
       this.Count += this.$refs.t.cal();
       this.Count += this.$refs.u.cal();
+      this.machineName.push('AutoMiss');
+      this.machineNum.push(this.OldCount-this.Count);
+      this.OldCount = this.Count;
       this.Count += this.$refs.v.cal();
       this.Count += this.$refs.w.cal();
       this.Count += this.$refs.x.cal();
+      this.machineName.push('SmallMac');
+      this.machineNum.push(this.OldCount-this.Count);
+      this.OldCount = this.Count;
       this.Count += this.$refs.y.cal();
       this.Count += this.$refs.z.cal();
       this.Count += this.$refs.aa.cal();
+      this.machineName.push('molecule');
+      this.machineNum.push(this.OldCount-this.Count);
+      this.OldCount = this.Count;
       this.Count += this.$refs.ab.cal();
       this.Count += this.$refs.ac.cal();
       this.Count += this.$refs.ad.cal();
+      this.machineName.push('BioCest');
+      this.machineNum.push(this.OldCount-this.Count);
+      this.OldCount = this.Count;
       this.Count += this.$refs.ae.cal();
       this.Count += this.$refs.af.cal();
       this.Count += this.$refs.ag.cal();
+      this.machineName.push('Digital');
+      this.machineNum.push(this.OldCount-this.Count);
+      this.OldCount = this.Count;
       this.Count += this.$refs.ah.cal();
       this.Count += this.$refs.ai.cal();
       this.Count += this.$refs.aj.cal();
+      this.machineName.push('Trash');
+      this.machineNum.push(this.OldCount-this.Count);
+      this.OldCount = this.Count;
+      this.$emit('data',this.machineName,this.machineNum);
       this.$Notice.success({
         title: '计算成功',
         desc: false ? '' : '现在允许你进行下一步Process'
