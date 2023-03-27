@@ -5,9 +5,39 @@ import Vue3DraggableResizable from 'vue3-draggable-resizable'
 import 'vue3-draggable-resizable/dist/Vue3DraggableResizable.css'
 export default defineComponent({
   components: { Vue3DraggableResizable },
+  props:["balue"],
   data() {
     return {
+      cityList: [
+        {
+          value: 'COM 3',
+          label: 'COM 3'
+        },
+        {
+          value: 'COM 4',
+          label: 'COM 4'
+        },
+        {
+          value: 'COM 5',
+          label: 'COM 5'
+        },
+        {
+          value: 'COM 6',
+          label: 'COM 6'
+        },
+        {
+          value: 'COM 7',
+          label: 'COM 7'
+        },
+        {
+          value: 'COM 8',
+          label: 'COM 8'
+        }
+      ],
+      model: '',
       modal:true,
+      Value:false,
+      value:false,
       x1: -620,
       y1: 70,
       h1: 120,
@@ -72,6 +102,14 @@ export default defineComponent({
         } else {
             return 0;
         }
+    },
+    ValueChange() {
+        console.log(this.balue)
+        if(this.balue == 1) {
+          this.Value = true;
+        } else {
+          this.Value = false;
+        }
     }
   }
 })
@@ -89,8 +127,20 @@ export default defineComponent({
         v-model:active="active"
         :draggable="true"
         :resizable="true"
+        @click="ValueChange"
         >
         <Image src="https://s1.ax1x.com/2023/03/18/ppJXgMV.png" fit="contain" width="100px" height="100px" alt="cover" />
         <Paragraph class="ivu-text-center" type="danger">自动除板密封机</Paragraph>
       </Vue3DraggableResizable>
+      <Drawer title="设备介绍" :closable="false" v-model="Value">
+        <Space>
+          <Switch v-model="value" @on-change="change" />
+          <h3>是否启用</h3>
+        </Space>
+        <Paragraph></Paragraph>
+        <h3>Grip :</h3>
+        <Select v-model="model" style="width:200px">
+            <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
+        </Select>
+      </Drawer>
 </template>
