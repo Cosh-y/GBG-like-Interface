@@ -231,7 +231,27 @@ export default {
   data() {
       return {
           progressData: [
-              { name: 'process1', label: 'Process 1', BoardCount: 0, boards: [] },
+              { name: 'process1', label: 'Process 1', BoardCount: 1, boards: [
+                { name: 'board1', content: 
+                  [
+                    { function: 'Get from Hotel', id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' },
+                    { function: 'Run Sequence',   id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOqEQ.png' },
+                    { function: 'Peel',           id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJXgMV.png' },
+                    { function: 'Run Sequence',   id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOqEQ.png' },
+                    { function: 'Put In Hotel',   id: 2, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' }
+                  ]
+                },
+                {name: 'board2', content: 
+                  [
+                    { function: 'Get from Hotel', id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' },
+                    { function: 'Run Sequence',   id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOqEQ.png' },
+                    { function: 'Seal Plate',     id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJXTR1.png' },
+                    { function: 'Run Sequence',   id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOqEQ.png' },
+                    { function: 'Put In Hotel',   id: 2, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' }
+                  ]
+                }
+              ] 
+            },
               { name: 'process2', label: 'Process 2', BoardCount: 0, boards: [] },
               { name: 'process3', label: 'Process 3', BoardCount: 0, boards: [] }
           ],
