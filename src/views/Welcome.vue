@@ -1,5 +1,6 @@
 <template>
-    <div id="building"></div>
+    <div>
+        <div id="building"></div>
     <div class="StyleTwo">
         <Carousel autoplay autoplay-speed="3000" v-model="value" loop>
         <CarouselItem>
@@ -33,6 +34,7 @@
         </Carousel>
     </div>
     <div>null</div>
+    </div>
 </template>
 <script>
     export default {

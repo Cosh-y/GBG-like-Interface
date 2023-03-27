@@ -2,7 +2,8 @@
 import { Row } from 'view-ui-plus';
 
 <template>
-<div id="building"></div>
+    <div>
+        <div id="building"></div>
 <Row>
     <Col span="16" offset="4">
         <Card style="width:1000px;height:1930px;">
@@ -77,6 +78,8 @@ import { Row } from 'view-ui-plus';
     </Col>
 </Row>
 <GlobalFooter  :links="links" :copyright="copyright" />
+    </div>
+
 </template>
 
 <script>

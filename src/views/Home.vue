@@ -8,13 +8,28 @@ export default {
   },
   data () {
             return {
+                transitionName:'',
                 time: (new Date()).getTime() - 86400 * 3 * 1000
             }
   },
   setup() {
   },
   methods: {
-  }
+  },
+  watch: {
+    //使用watch 监听$router的变化
+    $route(to, from) {
+      //如果to索引大于from索引,判断为前进状态,反之则为后退状态
+      console.log(to, "to");
+      console.log(from, "from");
+      if (to.meta.index > from.meta.index) {
+        //设置动画名称
+        this.transitionName = "fade";
+      } else {
+        this.transitionName = "transition-drop";
+      }
+    },
+  },
 }
 </script>
 
@@ -27,7 +42,7 @@ export default {
                 <!-- <div class="layout-logo"></div> -->
                 <div class="layout-nav">
                     <MenuItem name="0">
-                        <Icon type="ios-navigate"></Icon>
+                        <Icon type="ios-aperture"></Icon>
                         <router-link to="/Welcome">Welcome</router-link>
                     </MenuItem>
                     <MenuItem name="1">
@@ -85,7 +100,9 @@ export default {
                     Content
                     <router-view/>
                 </Content> -->
-                <router-view/>
+                <transition :name="transitionName">
+                    <router-view/>
+                </transition>
             <!-- </Layout> -->
         <!-- </Layout> -->
     </Layout>
@@ -115,4 +132,29 @@ export default {
     margin: 0 auto;
     margin-right: 20px;
 }
+.slide-right-enter-active, .slide-right-leave-active, .slide-left-enter-active, .slide-left-leave-active {
+      will-change: transform;
+      transition: all 500ms;
+      position: absolute;
+    }
+
+    .slide-right-enter {
+      opacity: 0;
+      transform: translate3d(-100%, 0, 0);
+    }
+
+    .slide-right-leave-active {
+      opacity: 0;
+      transform: translate3d(100%, 0, 0);
+    }
+
+    .slide-left-enter {
+      opacity: 0;
+      transform: translate3d(100%, 0, 0);
+    }
+
+    .slide-left-leave-active {
+      opacity: 0;
+      transform: translate3d(-100%, 0, 0);
+    }
 </style>

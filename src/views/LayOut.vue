@@ -1,4 +1,5 @@
 <template>
+  <div>
     <Modal
       v-model="modal"
       title="规划设备阶段">
@@ -68,7 +69,12 @@
         <arm ref = "b" :balue="model"></arm>
         <arm ref = "c" :balue="model"></arm>
       </DraggableContainer>
-      <Button @click="Cal()" type="primary" size="large">计算当前设备数量</Button>
+      <space>
+        <Button @click="Cal()" type="primary" size="large">计算当前设备数量</Button>
+        <transition name="move-down">
+          <Button v-if="showButton" @click="saveProgress()" type="success" size="large">进入Process步骤</Button>
+        </transition>
+      </space>
       <h2>当前已用设备池中设备数量:<Text type="danger">{{ Count }}</Text></h2>
     </div>
   </div>
@@ -123,10 +129,15 @@
         </Typography>
       </div>
     </card>
-    <Button @click="Cal()" type="primary" size="large">计算剩余设备数量</Button>
+    <space>
+      <Button @click="Cal()" type="primary" size="large">计算剩余设备数量</Button>
+      <transition name="move-down">
+          <Button v-if="showButton" @click="saveProgress()" type="success" size="large">进入Process步骤</Button>
+      </transition>
+    </space>
       <h2>当前可用设备池中设备数量:<Text type="danger">{{ 36-Count }}</Text></h2>
   </div>
-  
+  </div> 
 </template>
 
 <script>
@@ -168,6 +179,7 @@ export default defineComponent({
       Value:false,
       modal:true,
       active: false,
+      showButton:false,
       fit: "FUCK",
       fitList: ['fill', 'contain', 'cover', 'none', 'scale-down'],
       url: 'https://file.iviewui.com/images/image-demo-11.jpg'
@@ -254,10 +266,19 @@ export default defineComponent({
         console.log(this.machineName[i]);
         console.log(this.machineNum[i]);
       }
-      this.$Notice.success({
+      if (this.Count == 0) {
+        this.$Notice.error({
+        title: '计算失败',
+        desc: false ? '' : '设备池数量为0，现在不允许您进行下一步Process'
+        });
+        this.showButton = false;
+      } else {
+        this.$Notice.success({
         title: '计算成功',
         desc: false ? '' : '现在允许你进行下一步Process'
-      });
+        });
+        this.showButton = true;
+      }
     },
     Deployment() {
       this.$refs.g.x3 = 1;
@@ -279,7 +300,7 @@ export default defineComponent({
       this.Cal();
     },
     saveProgress() {
-      this.$router.push('./LayOutToProcess')
+      this.$router.push('./Process')
     }
   }
 })
@@ -294,6 +315,10 @@ position:fixed;
 background-size:100% 100%;
 opacity: 0.5;
 z-index: 0;
+}
+.rightside{
+  vertical-align: middle;
+  text-align: right;
 }
 .parent {
   width: 700px;
