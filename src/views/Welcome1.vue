@@ -29,7 +29,7 @@ import { Row } from 'view-ui-plus';
                 <Paragraph style="font-size: 18px;font-weight: bold;font-family: 'Times New Roman', Times, serif;">
                 对标美国GreenButtonGo,实现中国的GreenButtonGo.
                 <Text type="success">改善缓解当前中国在该领域的空白。</Text>
-                服务广大中国实验室调度排程。这是我们小组与LMDC实验室的共同目标。
+                服务广大中国实验室调度排程。这是我们小组与所在实验室的共同目标。
                 </Paragraph>
             </space>
             <Paragraph></Paragraph>
@@ -63,6 +63,9 @@ import { Row } from 'view-ui-plus';
                 </Timeline>
                 <Title :level="2">感谢所有参与项目的人员：
                     <AvatarList size="large" :list="list" />
+                    <div class="imgStyle">
+                        <h5>(图片已模糊处理)</h5>
+                    </div>
                 </Title>
                 </space>
             </div>
@@ -84,23 +87,23 @@ import { Row } from 'view-ui-plus';
                 value1:30,
                 list: [
                     {
-                        src: 'https://s1.ax1x.com/2023/03/27/ppshLyn.jpg',
+                        src: 'https://s1.ax1x.com/2023/03/27/ppywZNt.jpg',
                         tip: '隐私保护'
                     },
                     {
-                        src: 'https://s1.ax1x.com/2023/03/27/ppshvwV.jpg',
+                        src: 'https://s1.ax1x.com/2023/03/27/ppywe4P.jpg',
                         tip: '隐私保护'
                     },
                     {
-                        src: 'https://s1.ax1x.com/2023/03/27/ppshOLq.jpg',
+                        src: 'https://s1.ax1x.com/2023/03/27/ppywVAI.jpg',
                         tip: '隐私保护'
                     },
                     {
-                        src: 'https://s1.ax1x.com/2023/03/27/ppshje0.jpg',
+                        src: 'https://s1.ax1x.com/2023/03/27/ppywn9f.jpg',
                         tip: '隐私保护'
                     },
                     {
-                        src: 'https://s1.ax1x.com/2023/03/27/ppshqQs.jpg',
+                        src: 'https://s1.ax1x.com/2023/03/27/ppy0F2T.jpg',
                         tip: '隐私保护'
                     },
                 ],

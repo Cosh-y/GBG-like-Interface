@@ -19,7 +19,7 @@
         <CarouselItem>
             <div class="demo-carousel">
                 <div class="StyleSix">
-                    <p>DIRECT BY:LDMC LAB</p>
+                    <p>DIRECT BY:FAMOUS LAB</p>
                 </div>
                 <div class="StyleSeven">
                     <p>WE BUILD EVETHING WITH PASSION</p>
