@@ -26,7 +26,10 @@ export default {
             <Menu mode="horizontal" theme="light" active-name="1">
                 <!-- <div class="layout-logo"></div> -->
                 <div class="layout-nav">
-                    <Time :time="time" type="date" />
+                    <MenuItem name="0">
+                        <Icon type="ios-navigate"></Icon>
+                        <router-link to="/Welcome">Welcome</router-link>
+                    </MenuItem>
                     <MenuItem name="1">
                         <Icon type="ios-navigate"></Icon>
                         <router-link to="/LayOut">LayOut</router-link>
