@@ -408,7 +408,7 @@ export default {
     },
 
     saveProgress() {
-      this.$router.push('./Run')
+      this.$router.push('./Waiting')
     }
   },
   mounted() {
