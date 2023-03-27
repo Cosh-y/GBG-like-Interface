@@ -23,9 +23,9 @@
         <Trash ref = "ai" :balue="model"></Trash>
         <Trash ref = "aj" :balue="model"></Trash>
         <!--极小型数字条码读取器-->
-        <Digital ref = "ae"></Digital>
-        <Digital ref = "af"></Digital>
-        <Digital ref = "ag"></Digital>
+        <Digital ref = "ae" :balue="model"></Digital>
+        <Digital ref = "af" :balue="model"></Digital>
+        <Digital ref = "ag" :balue="model"></Digital>
         <!--生物板巢-->
         <BioCest ref = "ab"></BioCest>
         <BioCest ref = "ac"></BioCest>
@@ -81,6 +81,8 @@
           <Option v-for="item in cityList" :value="item.value" :key="item.value">{{ item.label }}</Option>
           </Select>
           <Drawer title="设备介绍" :closable="false" v-model="Value">
+            <Button @click="Deployment()" type="success" size="large" long>部署样例</Button>
+            <Typography>--------------------------------------------</Typography>
             <Typography>
               <Title :level="2">机械臂</Title>
               <Paragraph>
@@ -252,6 +254,25 @@ export default defineComponent({
         desc: false ? '' : '现在允许你进行下一步Process'
       });
     },
+    Deployment() {
+      this.$refs.g.x3 = 1;
+      this.$refs.g.y3 = 1;
+      this.$refs.h.x3 = 100;
+      this.$refs.h.y3 = 1;
+      this.$refs.a.x1 = 1;
+      this.$refs.a.y1 = 150;
+      this.$refs.v.x8 = 1;
+      this.$refs.v.y8 = 300;
+      this.$refs.s.x7 = 300;
+      this.$refs.s.y7 = 1;
+      this.$refs.j.x4 = 300;
+      this.$refs.j.y4 = 151;
+      this.$Notice.success({
+        title: '部署成功',
+        desc: false ? '' : '已成功部署demo样例！'
+      });
+      this.Cal();
+    }
   }
 })
 </script>
