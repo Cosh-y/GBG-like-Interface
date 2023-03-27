@@ -17,6 +17,7 @@
     <div id="building"></div>
     <div id="myshape">
     <div class="parent">
+      <!-- <Button size="large" type="success" shape="circle" icon="md-jet" @click="saveProgress">Let's Start!</Button> -->
       <DraggableContainer>
         <!--垃圾处理-->
         <Trash ref = "ah" :balue="model"></Trash>
@@ -27,45 +28,45 @@
         <Digital ref = "af" :balue="model"></Digital>
         <Digital ref = "ag" :balue="model"></Digital>
         <!--生物板巢-->
-        <BioCest ref = "ab"></BioCest>
-        <BioCest ref = "ac"></BioCest>
-        <BioCest ref = "ad"></BioCest>
+        <BioCest ref = "ab" :balue="model"></BioCest>
+        <BioCest ref = "ac" :balue="model"></BioCest>
+        <BioCest ref = "ad" :balue="model"></BioCest>
         <!--美谷分子仪-->
-        <molecule ref = "y"></molecule>
-        <molecule ref = "z"></molecule>
-        <molecule ref = "aa"></molecule>
+        <molecule ref = "y" :balue="model"></molecule>
+        <molecule ref = "z" :balue="model"></molecule>
+        <molecule ref = "aa" :balue="model"></molecule>
         <!--微孔热封膜机-->
-        <SmallMac ref = "v"></SmallMac>
-        <SmallMac ref = "w"></SmallMac>
-        <SmallMac ref = "x"></SmallMac>
+        <SmallMac ref = "v" :balue="model"></SmallMac>
+        <SmallMac ref = "w" :balue="model"></SmallMac>
+        <SmallMac ref = "x" :balue="model"></SmallMac>
         <!--自动除板密封机-->
-        <AutoMiss ref = "s"></AutoMiss>
-        <AutoMiss ref = "t"></AutoMiss>
-        <AutoMiss ref = "u"></AutoMiss>
+        <AutoMiss ref = "s" :balue="model"></AutoMiss>
+        <AutoMiss ref = "t" :balue="model"></AutoMiss>
+        <AutoMiss ref = "u" :balue="model"></AutoMiss>
         <!--试剂分液器-->
-        <reagent ref = "p"></reagent>
-        <reagent ref = "q"></reagent>
-        <reagent ref = "r"></reagent>
+        <reagent ref = "p" :balue="model"></reagent>
+        <reagent ref = "q" :balue="model"></reagent>
+        <reagent ref = "r" :balue="model"></reagent>
         <!--ATS-100-->
-        <ATS ref = "m"></ATS>
-        <ATS ref = "n"></ATS>
-        <ATS ref = "o"></ATS>
+        <ATS ref = "m" :balue="model"></ATS>
+        <ATS ref = "n" :balue="model"></ATS>
+        <ATS ref = "o" :balue="model"></ATS>
         <!--全自动液体工作站-->
-        <fliud ref = "j"></fliud>
-        <fliud ref = "k"></fliud>
-        <fliud ref = "l"></fliud>
+        <fliud ref = "j" :balue="model"></fliud>
+        <fliud ref = "k" :balue="model"></fliud>
+        <fliud ref = "l" :balue="model"></fliud>
         <!--通用孔板存储-->
-        <CommonStore ref = "g"></CommonStore>
-        <CommonStore ref = "h"></CommonStore>
-        <CommonStore ref = "i"></CommonStore>
+        <CommonStore ref = "g" :balue="model"></CommonStore>
+        <CommonStore ref = "h" :balue="model"></CommonStore>
+        <CommonStore ref = "i" :balue="model"></CommonStore>
         <!--LiCONic存储-->
-        <LiCoNic ref = "d"></LiCoNic>
-        <LiCoNic ref = "e"></LiCoNic>
-        <LiCoNic ref = "f"></LiCoNic>
+        <LiCoNic ref = "d" :balue="model"></LiCoNic>
+        <LiCoNic ref = "e" :balue="model"></LiCoNic>
+        <LiCoNic ref = "f" :balue="model"></LiCoNic>
         <!--机械手 3个-->
-        <arm ref = "a"></arm>
-        <arm ref = "b"></arm>
-        <arm ref = "c"></arm>
+        <arm ref = "a" :balue="model"></arm>
+        <arm ref = "b" :balue="model"></arm>
+        <arm ref = "c" :balue="model"></arm>
       </DraggableContainer>
       <Button @click="Cal()" type="primary" size="large">计算当前设备数量</Button>
       <h2>当前已用设备池中设备数量:<Text type="danger">{{ Count }}</Text></h2>
@@ -180,75 +181,79 @@ export default defineComponent({
       this.Count += this.$refs.b.cal();
       this.Count += this.$refs.c.cal();
       this.machineName.push('MachineArm');
-      this.machineNum.push(this.OldCount-this.Count);
+      this.machineNum.push(this.Count-this.OldCount);
       this.OldCount = this.Count;
       this.Count += this.$refs.d.cal();
       this.Count += this.$refs.e.cal();
       this.Count += this.$refs.f.cal();
       this.machineName.push('LiCoNic');
-      this.machineNum.push(this.OldCount-this.Count);
+      this.machineNum.push(this.Count-this.OldCount);
       this.OldCount = this.Count;
       this.Count += this.$refs.g.cal();
       this.Count += this.$refs.h.cal();
       this.Count += this.$refs.i.cal();
       this.machineName.push('CommonStore');
-      this.machineNum.push(this.OldCount-this.Count);
+      this.machineNum.push(this.Count-this.OldCount);
       this.OldCount = this.Count;
       this.Count += this.$refs.j.cal();
       this.Count += this.$refs.k.cal();
       this.Count += this.$refs.l.cal();
       this.machineName.push('Fliud');
-      this.machineNum.push(this.OldCount-this.Count);
+      this.machineNum.push(this.Count-this.OldCount);
       this.OldCount = this.Count;
       this.Count += this.$refs.m.cal();
       this.Count += this.$refs.n.cal();
       this.Count += this.$refs.o.cal();
       this.machineName.push('ATS');
-      this.machineNum.push(this.OldCount-this.Count);
+      this.machineNum.push(this.Count-this.OldCount);
       this.OldCount = this.Count;
       this.Count += this.$refs.p.cal();
       this.Count += this.$refs.q.cal();
       this.Count += this.$refs.r.cal();
       this.machineName.push('reagent');
-      this.machineNum.push(this.OldCount-this.Count);
+      this.machineNum.push(this.Count-this.OldCount);
       this.OldCount = this.Count;
       this.Count += this.$refs.s.cal();
       this.Count += this.$refs.t.cal();
       this.Count += this.$refs.u.cal();
       this.machineName.push('AutoMiss');
-      this.machineNum.push(this.OldCount-this.Count);
+      this.machineNum.push(this.Count-this.OldCount);
       this.OldCount = this.Count;
       this.Count += this.$refs.v.cal();
       this.Count += this.$refs.w.cal();
       this.Count += this.$refs.x.cal();
       this.machineName.push('SmallMac');
-      this.machineNum.push(this.OldCount-this.Count);
+      this.machineNum.push(this.Count-this.OldCount);
       this.OldCount = this.Count;
       this.Count += this.$refs.y.cal();
       this.Count += this.$refs.z.cal();
       this.Count += this.$refs.aa.cal();
       this.machineName.push('molecule');
-      this.machineNum.push(this.OldCount-this.Count);
+      this.machineNum.push(this.Count-this.OldCount);
       this.OldCount = this.Count;
       this.Count += this.$refs.ab.cal();
       this.Count += this.$refs.ac.cal();
       this.Count += this.$refs.ad.cal();
       this.machineName.push('BioCest');
-      this.machineNum.push(this.OldCount-this.Count);
+      this.machineNum.push(this.Count-this.OldCount);
       this.OldCount = this.Count;
       this.Count += this.$refs.ae.cal();
       this.Count += this.$refs.af.cal();
       this.Count += this.$refs.ag.cal();
       this.machineName.push('Digital');
-      this.machineNum.push(this.OldCount-this.Count);
+      this.machineNum.push(this.Count-this.OldCount);
       this.OldCount = this.Count;
       this.Count += this.$refs.ah.cal();
       this.Count += this.$refs.ai.cal();
       this.Count += this.$refs.aj.cal();
       this.machineName.push('Trash');
-      this.machineNum.push(this.OldCount-this.Count);
+      this.machineNum.push(this.Count-this.OldCount);
       this.OldCount = this.Count;
       this.$emit('data',this.machineName,this.machineNum);
+      for (var i=0;i<this.machineName.length;i++) {
+        console.log(this.machineName[i]);
+        console.log(this.machineNum[i]);
+      }
       this.$Notice.success({
         title: '计算成功',
         desc: false ? '' : '现在允许你进行下一步Process'
@@ -272,6 +277,9 @@ export default defineComponent({
         desc: false ? '' : '已成功部署demo样例！'
       });
       this.Cal();
+    },
+    saveProgress() {
+      this.$router.push('./LayOutToProcess')
     }
   }
 })
@@ -300,12 +308,12 @@ z-index: 0;
   background-size:100% 100%;
 }
 .StyleOne{
-background:url("https://s1.ax1x.com/2023/03/18/ppJs891.jpg");
-z-index: 10;
-top: 130px;
-left: 100px;
-width: 500px;
-height: 200px;
-position: fixed;
+  background:url("https://s1.ax1x.com/2023/03/18/ppJs891.jpg");
+  z-index: 10;
+  top: 130px;
+  left: 100px;
+  width: 500px;
+  height: 200px;
+  position: fixed;
 }
 </style>

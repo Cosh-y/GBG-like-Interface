@@ -19,6 +19,12 @@ export default {
           this.machineName = arr1;
           this.machineNum = arr2;
       },
+      printData() {
+        for (var i=0;i<this.machineName.length;i++) {
+        console.log(this.machineName[i]);
+        console.log(this.machineNum[i]);
+        }
+      }
   }
 };
 </script>
@@ -26,7 +32,6 @@ export default {
 
 <template>
     <div>
-      <p>Hello!</p>
       <LayOut @data="handleData"></LayOut>
       <Process :machineName="machineName" :machineNum="machineNum"></Process>
     </div>
