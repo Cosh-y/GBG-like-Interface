@@ -65,7 +65,7 @@ import { Row } from 'view-ui-plus';
                 <Title :level="2">感谢所有参与项目的人员：
                     <AvatarList size="large" :list="list" />
                     <div class="imgStyle">
-                        <h5>(图片已模糊处理)</h5>
+                        <h5>(头像已虚拟处理)</h5>
                     </div>
                 </Title>
                 </space>
@@ -81,7 +81,8 @@ import { Row } from 'view-ui-plus';
     </div>
 
 </template>
-
+<!-- https://s1.ax1x.com/2023/03/28/pp6qdeg.jpg
+https://s1.ax1x.com/2023/03/28/pp6qsWq.jpg -->
 <script>
     export default {
         data () {
@@ -90,23 +91,23 @@ import { Row } from 'view-ui-plus';
                 value1:30,
                 list: [
                     {
-                        src: 'https://s1.ax1x.com/2023/03/27/ppywZNt.jpg',
+                        src: 'https://s1.ax1x.com/2023/03/28/pp6qsWq.jpg',
                         tip: '隐私保护'
                     },
                     {
-                        src: 'https://s1.ax1x.com/2023/03/27/ppywe4P.jpg',
+                        src: 'https://s1.ax1x.com/2023/03/28/pp6qDFs.jpg',
                         tip: '隐私保护'
                     },
                     {
-                        src: 'https://s1.ax1x.com/2023/03/27/ppywVAI.jpg',
+                        src: 'https://s1.ax1x.com/2023/03/28/pp6q0oj.jpg',
                         tip: '隐私保护'
                     },
                     {
-                        src: 'https://s1.ax1x.com/2023/03/27/ppywn9f.jpg',
+                        src: 'https://s1.ax1x.com/2023/03/28/pp6qwwQ.jpg',
                         tip: '隐私保护'
                     },
                     {
-                        src: 'https://s1.ax1x.com/2023/03/27/ppy0F2T.jpg',
+                        src: 'https://s1.ax1x.com/2023/03/28/pp6qrYn.jpg',
                         tip: '隐私保护'
                     },
                 ],
