@@ -46,72 +46,12 @@
                       </draggable>
                     </template>
                 </Panel>
-                <Panel name="LiCONiC">
-                    LiCONiC
-                    <template #content>
-                        <draggable
-                            class="dragArea list-group"
-                            :list="OperationLiCONiC"
-                            :group="{ name: 'device', pull: 'clone', put: false }"
-                            @change="log"
-                            item-key="function"
-                            :sort="false"
-                        >
-                            <template #item="{ element }">
-                                <div class="list-group-item">
-                                    <p><img :src="element.picurl" class="img-device" /></p>
-                                    {{ element.function }}
-                                </div>
-                            </template>
-                      </draggable>
-                    </template>
-                </Panel>
                 <Panel name="Biomek">
                     Biomek
                     <template #content>
                         <draggable
                             class="dragArea list-group"
                             :list="OperationBiomek"
-                            :group="{ name: 'device', pull: 'clone', put: false }"
-                            @change="log"
-                            item-key="function"
-                            :sort="false"
-                        >
-                            <template #item="{ element }">
-                                <div class="list-group-item">
-                                    <p><img :src="element.picurl" class="img-device" /></p>
-                                    {{ element.function }}
-                                </div>
-                            </template>
-                      </draggable>
-                    </template>
-                </Panel>
-                <Panel name="EDC">
-                    EDC ATS-100
-                    <template #content>
-                        <draggable
-                            class="dragArea list-group"
-                            :list="OperationEDC"
-                            :group="{ name: 'device', pull: 'clone', put: false }"
-                            @change="log"
-                            item-key="function"
-                            :sort="false"
-                        >
-                            <template #item="{ element }">
-                                <div class="list-group-item">
-                                    <p><img :src="element.picurl" class="img-device" /></p>
-                                    {{ element.function }}
-                                </div>
-                            </template>
-                      </draggable>
-                    </template>
-                </Panel>
-                <Panel name="TMC">
-                    Multidrop Combi
-                    <template #content>
-                        <draggable
-                            class="dragArea list-group"
-                            :list="OperationTMC"
                             :group="{ name: 'device', pull: 'clone', put: false }"
                             @change="log"
                             item-key="function"
@@ -152,26 +92,6 @@
                         <draggable
                             class="dragArea list-group"
                             :list="OperationWasp"
-                            :group="{ name: 'device', pull: 'clone', put: false }"
-                            @change="log"
-                            item-key="function"
-                            :sort="false"
-                        >
-                            <template #item="{ element }">
-                                <div class="list-group-item">
-                                    <p><img :src="element.picurl" class="img-device" /></p>
-                                    {{ element.function }}
-                                </div>
-                            </template>
-                      </draggable>
-                    </template>
-                </Panel>
-                <Panel name="ImageXPress">
-                    ImageXPress
-                    <template #content>
-                        <draggable
-                            class="dragArea list-group"
-                            :list="OperationXPress"
                             :group="{ name: 'device', pull: 'clone', put: false }"
                             @change="log"
                             item-key="function"
