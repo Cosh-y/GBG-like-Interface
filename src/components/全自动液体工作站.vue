@@ -118,6 +118,32 @@ export default defineComponent({
         } else {
           this.Value = false;
         }
+    },
+    resetArmer() {
+      this.x1= -620,
+      this.y1= 70,
+      this.x2= -520,
+      this.y2= 70,
+      this.x3= -420,
+      this.y3= 70,
+      this.x4= -320,
+      this.y4= 70,
+      this.x5= -320,
+      this.y5= 220,
+      this.x6= -420,
+      this.y6= 220,
+      this.x7= -520,
+      this.y7= 220,
+      this.x8= -620,
+      this.y8= 220,
+      this.x9= -620,
+      this.y9= 370,
+      this.x10= -520,
+      this.y10= 370,
+      this.x11= -420,
+      this.y11= 370,
+      this.x12= -320,
+      this.y12= 370
     }
   }
 })
