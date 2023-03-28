@@ -71,6 +71,7 @@
       </DraggableContainer>
       <space>
         <Button @click="Cal()" type="primary" size="large">计算当前设备数量</Button>
+        <Button @click="resetArm()" type="warning" size="large">复位</Button>
         <transition name="move-down">
           <Button v-if="showButton" @click="saveProgress()" type="success" size="large">进入Process步骤</Button>
         </transition>
@@ -131,6 +132,7 @@
     </card>
     <space>
       <Button @click="Cal()" type="primary" size="large">计算剩余设备数量</Button>
+      <Button @click="resetArm()" type="warning" size="large">复位</Button>
       <transition name="move-down">
           <Button v-if="showButton" @click="saveProgress()" type="success" size="large">进入Process步骤</Button>
       </transition>
@@ -176,6 +178,7 @@ export default defineComponent({
       machineNum: [],
       Count:0,
       OldCount:0,
+      resetflag:false,
       Value:false,
       modal:true,
       active: false,
@@ -266,7 +269,8 @@ export default defineComponent({
         console.log(this.machineName[i]);
         console.log(this.machineNum[i]);
       }
-      if (this.Count == 0) {
+      if (!this.resetflag) {
+        if (this.Count == 0) {
         this.$Notice.error({
         title: '计算失败',
         desc: false ? '' : '设备池数量为0，现在不允许您进行下一步Process'
@@ -279,8 +283,10 @@ export default defineComponent({
         });
         this.showButton = true;
       }
+      }
     },
     Deployment() {
+      this.resetArm();
       this.$refs.g.x3 = 1;
       this.$refs.g.y3 = 1;
       this.$refs.h.x3 = 100;
@@ -301,6 +307,51 @@ export default defineComponent({
     },
     saveProgress() {
       this.$router.push('./Process')
+    },
+    resetArm() {
+      this.$refs.a.resetArmer();
+      this.$refs.b.resetArmer();
+      this.$refs.c.resetArmer();
+      this.$refs.d.resetArmer();
+      this.$refs.e.resetArmer();
+      this.$refs.f.resetArmer();
+      this.$refs.g.resetArmer();
+      this.$refs.h.resetArmer();
+      this.$refs.i.resetArmer();
+      this.$refs.j.resetArmer();
+      this.$refs.k.resetArmer();
+      this.$refs.l.resetArmer();
+      this.$refs.m.resetArmer();
+      this.$refs.n.resetArmer();
+      this.$refs.o.resetArmer();
+      this.$refs.p.resetArmer();
+      this.$refs.q.resetArmer();
+      this.$refs.r.resetArmer();
+      this.$refs.s.resetArmer();
+      this.$refs.t.resetArmer();
+      this.$refs.u.resetArmer();
+      this.$refs.v.resetArmer();
+      this.$refs.w.resetArmer();
+      this.$refs.x.resetArmer();
+      this.$refs.y.resetArmer();
+      this.$refs.z.resetArmer();
+      this.$refs.aa.resetArmer();
+      this.$refs.ab.resetArmer();
+      this.$refs.ac.resetArmer();
+      this.$refs.ad.resetArmer();
+      this.$refs.ae.resetArmer();
+      this.$refs.af.resetArmer();
+      this.$refs.ag.resetArmer();
+      this.$refs.ah.resetArmer();
+      this.$refs.ai.resetArmer();
+      this.$refs.aj.resetArmer();
+      this.$Notice.success({
+        title: '复位成功',
+        desc: false ? '' : '已成功复位所有设备！'
+      });
+      this.resetflag = true;
+      this.Cal();
+      this.resetflag = false;
     }
   }
 })
