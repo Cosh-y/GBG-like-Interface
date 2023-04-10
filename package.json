@@ -16,6 +16,7 @@
   "dependencies": {
     "@infectoone/vue-ganttastic": "^2.1.4",
     "axios": "^0.27.0",
+    "echarts": "^5.4.2",
     "highcharts": "^10.3.3",
     "highcharts-vue": "^1.4.0",
     "jquery": "^3.6.4",
