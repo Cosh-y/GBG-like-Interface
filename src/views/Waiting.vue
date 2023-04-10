@@ -40,7 +40,7 @@ import { Card } from 'view-ui-plus';
     methods: {
         //3秒后进入跳转页面
         threeGo() {
-            const TIME_COUNT = 7;
+            const TIME_COUNT = 5;
             if (!this.timer) {
                 this.count = TIME_COUNT;
                 this.show = false;
