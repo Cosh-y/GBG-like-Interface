@@ -72,6 +72,7 @@
       <space>
         <Button @click="Cal()" type="primary" size="large">计算当前设备数量</Button>
         <Button @click="resetArm()" type="warning" size="large">复位</Button>
+<!--        <Button @click="send()" type="warning" size="large">发送请求</Button>-->
         <transition name="move-down">
           <Button v-if="showButton" @click="saveProgress()" type="success" size="large">进入Process步骤</Button>
         </transition>
@@ -159,6 +160,7 @@ import { defineComponent, toHandlers } from 'vue'
 import Vue3DraggableResizable from 'vue3-draggable-resizable'
 //default styles
 import 'vue3-draggable-resizable/dist/Vue3DraggableResizable.css'
+import httptool from "../http";
 export default defineComponent({
   components: { Vue3DraggableResizable,arm,LiCoNic,CommonStore,fliud,ATS,reagent,AutoMiss,SmallMac,molecule,BioCest,Digital,Trash },
   data() {
@@ -180,15 +182,40 @@ export default defineComponent({
       OldCount:0,
       resetflag:false,
       Value:false,
+      myObject: {
+
+      },
       modal:true,
       active: false,
       showButton:false,
+      message:"",
       fit: "FUCK",
       fitList: ['fill', 'contain', 'cover', 'none', 'scale-down'],
       url: 'https://file.iviewui.com/images/image-demo-11.jpg'
     }
   },
   methods: {
+    send() {
+      httptool.get("http://127.0.0.1:8000/login/",{
+        params:{
+          user:"123",
+          password:"123",
+        },
+        headers:{"Company": "BUAA company"},
+      }).then(response=>{
+        console.log(response);
+        //for循环let key是对象里面的键，再通过,[]的形式this.objNum[item]去获取对象的value值
+        this.myObject = response.data
+        for(let key in response.data){
+          console.log('key:',key);
+          console.log('value:',response.data[key ]);
+        }
+        console.log(response.data["name"])
+      }).catch(error=>{
+        console.log(error);
+        console.log(error.response);
+      })
+    },
     Cal() {
       this.Count = 0;
       this.OldCount = 0;
