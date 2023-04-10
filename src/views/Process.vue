@@ -1,6 +1,10 @@
 <template>
-    <Row style="padding: 20px;">
-        <Col span="4" offset="0">
+  <div id="buildProcess"></div>
+  <br>
+  <br>
+
+        <Row style="padding: 20px;">
+        <Col span="4" offset="1">
           <p>
               请选择当前工作流程:
 
@@ -9,7 +13,7 @@
               </Select>
           </p>
         </Col>
-        <Col span="11">
+        <Col span="11" >
             <Card style="width:400px;">
                 <p :gutter="100">
                     当前流程选项：
@@ -24,7 +28,7 @@
     </Row>
 
     <Row :gutter="16">
-        <Col span="5" id="device-col">
+        <Col span="4" id="device-col" offset="1">
             <Collapse v-model="value" accordion>
                 <Panel name="Plate Storage">
                     Plate Storage
@@ -134,7 +138,6 @@
             </div>
         </Col>
     </Row>
-
 </template>
 
 <script>
@@ -152,7 +155,7 @@ export default {
       return {
           progressData: [
               { name: 'process1', label: 'Process 1', BoardCount: 1, boards: [
-                { name: 'board1', content: 
+                { name: 'board1', content:
                   [
                     { function: 'Get from Hotel', id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' },
                     { function: 'Run Sequence',   id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOqEQ.png' },
@@ -161,7 +164,7 @@ export default {
                     { function: 'Put In Hotel',   id: 2, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' }
                   ]
                 },
-                {name: 'board2', content: 
+                {name: 'board2', content:
                   [
                     { function: 'Get from Hotel', id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' },
                     { function: 'Run Sequence',   id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOqEQ.png' },
@@ -170,7 +173,7 @@ export default {
                     { function: 'Put In Hotel',   id: 2, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' }
                   ]
                 }
-              ] 
+              ]
             },
               { name: 'process2', label: 'Process 2', BoardCount: 0, boards: [] },
               { name: 'process3', label: 'Process 3', BoardCount: 0, boards: [] }
@@ -196,7 +199,7 @@ export default {
             { function: 'Put In Stack',   id: 4, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' },
             { function: 'Edit Content',   id: 5, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' },
             { function: 'Incubate',       id: 6, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' },
-            { function: 'Hold',           id: 7, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' }        
+            { function: 'Hold',           id: 7, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' }
           ],
           OperationLiCONiC: [
             { function: 'Get from Hotel',       id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJO091.png' },
@@ -293,7 +296,7 @@ export default {
           }
         ]
       });
-      
+
       this.progressChoiceOn(labelHere);
       this.displayProgress = this.progressData[(this.progressData.length-1)];
       this.progressCount = this.progressData.length;
@@ -339,7 +342,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
+#buildProcess{
+  background:url("https://s1.ax1x.com/2023/04/10/ppbXwdO.jpg");
+  width:100%;
+  height:100%;
+  position:fixed;
+  background-size:100% 100%;
+  opacity: 0.3;
+  z-index: 0;
+}
   #nav {
         width: 100%;
         height: 535px;
@@ -358,7 +369,7 @@ export default {
     width: 280px;
     height: 510px;
     margin-right: 10px;
-    
+
     flex-shrink: 0;
   }
   .dragArea-list-group {
@@ -376,7 +387,7 @@ export default {
     border: solid 1px #eee;
     margin-bottom: 10px;
     cursor: move;
-  } 
+  }
   .list-group-item:hover {
     background-color: #f1f1f1;
     cursor: move;
