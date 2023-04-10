@@ -1,10 +1,19 @@
 <template>
-    <g-gantt-chart
+  <br>
+  <br>
+  <br>
+  <div id="build"></div>
+  <Row>
+    <Col span="22" offset="1">
+      <Crad>
+        <div>
+          <g-gantt-chart
       chart-start="2023-03-29 14:20"
-      chart-end="2023-03-29 16:20"
+      chart-end="2023-03-29 16:10"
       precision="hour"
       bar-start="myBeginDate"
       bar-end="myEndDate"
+      color-scheme = "sky"
     >
       <g-gantt-row
         label="P1"
@@ -60,19 +69,276 @@
         :bars="row13BarList"
       />
     </g-gantt-chart>
+        </div>
+  </Crad>
+    </Col>
+  </Row>
+
+  <br>
+  <br>
+  <Row>
+    <Col span="10" offset="1">
+      <Card>
+        <div id="main" style="background: #ffffff; width: 100%; height: 500px" ></div>
+      </Card>
+    </Col>
+    <Col span="11" offset="1">
+      <Card>
+        <div id="two" style="background: #ffffff; width: 100%; height: 500px"></div>
+      </Card>
+    </Col>
+  </Row>
+  <br>
+  <br>
+  <br>
+  <Row>
+    <Col span="22" offset="1">
+      <Card>
+        <div id="three" style="background: #ffffff; width: 100%; height: 500px"></div>
+      </Card>
+    </Col>
+  </Row>
+
+
+
   </template>
-  
+
   <script setup>
-  
-  import { ref } from "vue"
-  
+
+  import {onMounted, ref} from "vue"
+  import * as echarts from 'echarts';
+
+  let showElement = 0
+
+  onMounted(
+      () => {
+        initData()
+        initOne()
+        initTwo()
+        initThree()
+      }
+  )
+
+  function initTwo() {
+    var myChart = echarts.init(document.getElementById('two'));
+    var option = {
+      title: [
+      {
+        left: "center",
+        text: '计算时间（GBG由预测模型给出）'
+      }
+    ],
+      xAxis: {
+      type: 'category',
+      data: ['GBGCommonStimulate', 'GBGFastStimulate', 'Our algorithm']
+    },
+    yAxis: {
+      type: 'value'
+    },
+    series: [
+      {
+        data: [
+          {
+            value: 85,
+            itemStyle: {
+              color: '#52a139'
+            }
+          },
+          {
+            value: 72,
+            itemStyle: {
+              color: '#a90000'
+            }
+          },
+          1
+        ],
+        type: 'bar'
+      }
+    ]
+  };
+     myChart.setOption(option);
+  }
+
+
+  function addShowElement() {
+    showElement = (showElement + 1) % 3
+    console.log(showElement)
+  }
+
+  let base = 0;
+  let oneDay = 0.0001;
+  let date = [];
+  let data = [Math.random() * 90];
+  function initData() {
+    for (let i = 1; i < 20000; i++) {
+      var now = base += oneDay;
+      date.push(now);
+      var tmp = Math.round((Math.random()-0.53) * 20 + data[i - 1]);
+      if (tmp < 0) {
+        tmp = 0;
+      }
+      if (tmp >= 100) {
+        tmp = Math.round((Math.random()-1) * 20 + data[i - 1]);
+      }
+      data.push(tmp);
+    }
+  }
+
+  function initThree() {
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('three'));
+    // 指定图表的配置项和数据
+    var option = {
+      tooltip: {
+      trigger: 'axis',
+      position: function (pt) {
+        return [pt[0], '10%'];
+      }
+    },
+      title: {
+      left: 'center',
+      text: 'CPU占用率随时间变化示意'
+    },
+  toolbox: {
+    feature: {
+      dataZoom: {
+        yAxisIndex: 'none'
+      },
+      restore: {},
+      saveAsImage: {}
+    }
+  },
+  xAxis: {
+    type: 'category',
+    boundaryGap: false,
+    data: date
+  },
+  yAxis: {
+    type: 'value',
+    boundaryGap: [0, 0.1]
+  },
+  dataZoom: [
+    {
+      type: 'inside',
+      start: 0,
+      end: 10
+    },
+    {
+      start: 0,
+      end: 10
+    }
+  ],
+  series: [
+    {
+      name: 'CPU占用率',
+      type: 'line',
+      symbol: 'none',
+      sampling: 'lttb',
+      itemStyle: {
+        color: 'rgb(255, 70, 131)'
+      },
+      areaStyle: {
+        color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+          {
+            offset: 0,
+            color: 'rgb(255, 158, 68)'
+          },
+          {
+            offset: 1,
+            color: 'rgb(255, 70, 131)'
+          }
+        ])
+      },
+          data: data
+        }
+      ]
+    };
+    myChart.setOption(option);
+  }
+
+
+  function initOne() {
+  // 基于准备好的dom，初始化echarts实例
+  var myChart = echarts.init(document.getElementById('main'));
+  // 指定图表的配置项和数据
+  var option = {
+  title: [
+    {
+      left: "center",
+      text: '设备利用率'
+    }
+  ],
+  polar: {
+    radius: [30, '80%']
+  },
+  angleAxis: {
+    max: 0.9,
+    startAngle: 75
+  },
+  radiusAxis: {
+    type: 'category',
+    data: ['机械臂', '液体工作站', '冰箱', '撕膜机', '封膜机']
+  },
+  tooltip: {},
+  series: {
+    type: 'bar',
+    data: [
+      {
+        value:0.66,
+        itemStyle: {
+          color:'#7e7702'
+        }
+      },
+      {
+        value:0.82,
+        itemStyle: {
+          color:'#299381'
+        }
+      },
+      {
+        value:0.047,
+        itemStyle: {
+          color:'#91cc75'
+        }
+      },
+      {
+        value:0.12,
+        itemStyle: {
+          color:'#845da6'
+        }
+      },
+      {
+        value:0.14,
+        itemStyle: {
+          color:'#d96544'
+        }
+      },
+    ],
+    coordinateSystem: 'polar',
+    label: {
+      show: true,
+      position: 'middle',
+      formatter: '{b}: {c}'
+    }
+  }
+  };
+  // 使用刚指定的配置项和数据显示图表。
+  myChart.setOption(option);
+}
+
+
   const row1BarList = ref([         // Plate 1 整体
     {
       myBeginDate: "2023-03-29 14:36",
       myEndDate: "2023-03-29 15:53",
       ganttBarConfig: {    // each bar must have a nested ganttBarConfig object ...
         id: "Plate-1", // ... and a unique "id" property
-        label: "whole process of plate 1"
+        label: "whole process of plate 1",
+        style: {
+          fontSize:"20px",
+          color:"white",
+          background:"#573400"
+        }
       }
     },
   ])
@@ -85,7 +351,7 @@
         hasHandles: true,
         label: "refrigerator 1",
         style: {     // arbitrary CSS styling for your bar
-          background: "#e09b69",
+          background: "#3EBBB5",
           borderRadius: "20px",
           color: "black"
         }
@@ -99,7 +365,7 @@
         hasHandles: true,
         label: "refrigerator 1",
         style: {     // arbitrary CSS styling for your bar
-          background: "#e09b69",
+          background: "#3EBBB5",
           borderRadius: "20px",
           color: "black"
         }
@@ -115,7 +381,7 @@
         hasHandles: true,
         label: "manipulater 1",
         style: {     // arbitrary CSS styling for your bar
-          background: "#e09b69",
+          background: "#A19D36",
           borderRadius: "20px",
           color: "black"
         }
@@ -129,7 +395,7 @@
             hasHandles: true,
             label: "manipulater 1",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#A19D36",
             borderRadius: "20px",
             color: "black"
             }
@@ -143,7 +409,7 @@
             hasHandles: true,
             label: "manipulater 1",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#A19D36",
             borderRadius: "20px",
             color: "black"
             }
@@ -157,7 +423,7 @@
             hasHandles: true,
             label: "manipulater 1",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#A19D36",
             borderRadius: "20px",
             color: "black"
             }
@@ -173,7 +439,7 @@
             hasHandles: true,
             label: "peelPlace 1",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#52A136",
             borderRadius: "20px",
             color: "black"
             }
@@ -189,7 +455,7 @@
             hasHandles: true,
             label: "peel 1",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#52A136",
             borderRadius: "20px",
             color: "black"
             }
@@ -205,7 +471,7 @@
             hasHandles: true,
             label: "stationPlace 1",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#7E3399",
             borderRadius: "20px",
             color: "black"
             }
@@ -219,7 +485,7 @@
             hasHandles: true,
             label: "stationPlace 1",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#7E3399",
             borderRadius: "20px",
             color: "black"
             }
@@ -233,21 +499,26 @@
             hasHandles: true,
             label: "stationPlace 1",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#7E3399",
             borderRadius: "20px",
             color: "black"
             }
         }
     },
   ])
-  
+
   const row7BarList = ref([     // Plate 2 整体
   {
       myBeginDate: "2023-03-29 14:36",
       myEndDate: "2023-03-29 16:00",
       ganttBarConfig: {    // each bar must have a nested ganttBarConfig object ...
         id: "Plate-2", // ... and a unique "id" property
-        label: "whole process of plate 2"
+        label: "whole process of plate 2",
+        style: {
+          fontSize:"20px",
+          color:"white",
+          background:"#573400"
+        }
       }
     },
   ])
@@ -260,7 +531,7 @@
             hasHandles: true,
             label: "refrigerator 2",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#99336F",
             borderRadius: "20px",
             color: "black"
             }
@@ -274,7 +545,7 @@
             hasHandles: true,
             label: "refrigerator 2",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#99336F",
             borderRadius: "20px",
             color: "black"
             }
@@ -290,7 +561,7 @@
             hasHandles: true,
             label: "manipulater 1",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#C4E2A7",
             borderRadius: "20px",
             color: "black"
             }
@@ -304,7 +575,7 @@
             hasHandles: true,
             label: "manipulater 1",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#C4E2A7",
             borderRadius: "20px",
             color: "black"
             }
@@ -318,7 +589,7 @@
             hasHandles: true,
             label: "manipulater 1",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#C4E2A7",
             borderRadius: "20px",
             color: "black"
             }
@@ -332,7 +603,7 @@
             hasHandles: true,
             label: "manipulater 1",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#C4E2A7",
             borderRadius: "20px",
             color: "black"
             }
@@ -348,7 +619,7 @@
             hasHandles: true,
             label: "sealPlace 2",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#D890DA",
             borderRadius: "20px",
             color: "black"
             }
@@ -364,7 +635,7 @@
             hasHandles: true,
             label: "seal 2",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#988CD9",
             borderRadius: "20px",
             color: "black"
             }
@@ -380,7 +651,7 @@
             hasHandles: true,
             label: "stationPlace 2",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#85D6BF",
             borderRadius: "20px",
             color: "black"
             }
@@ -394,7 +665,7 @@
             hasHandles: true,
             label: "stationPlace 2",
             style: {     // arbitrary CSS styling for your bar
-            background: "#e09b69",
+            background: "#85D6BF",
             borderRadius: "20px",
             color: "black"
             }
@@ -407,28 +678,41 @@
         myEndDate: "2023-03-29 15:05",
         ganttBarConfig: {
             id: "station-1-1",
-            //hasHandles: true,
+            hasHandles: true,
             label: "station",
-            // style: {     // arbitrary CSS styling for your bar
-            // background: "#e09b69",
-            // borderRadius: "20px",
-            // color: "black"
+            style: {     // arbitrary CSS styling for your bar
+              background: "#85D6BF",
+              borderRadius: "20px",
+              color: "black"
             }
-        
+        }
     },
     {
         myBeginDate: "2023-03-29 15:36",
         myEndDate: "2023-03-29 15:46",
         ganttBarConfig: {
             id: "station-1-2",
-            //hasHandles: true,
+            hasHandles: true,
             label: "station",
-            // style: {     // arbitrary CSS styling for your bar
-            // background: "#e09b69",
-            // borderRadius: "20px",
-            // color: "black"
+            style: {     // arbitrary CSS styling for your bar
+              background: "#85D6BF",
+              borderRadius: "20px",
+              color: "black"
             }
-        
+        }
+
     },
   ])
   </script>
+
+<style>
+#build{
+background:url("https://s1.ax1x.com/2023/04/10/ppbqWeU.jpg");
+width:100%;
+height:100%;
+position:fixed;
+background-size:100% 100%;
+opacity: 0.3;
+z-index: 0;
+}
+</style>
