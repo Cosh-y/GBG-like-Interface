@@ -291,7 +291,6 @@ export default defineComponent({
       this.machineName.push('Trash');
       this.machineNum.push(this.Count-this.OldCount);
       this.OldCount = this.Count;
-      this.$emit('data',this.machineName,this.machineNum);
       for (var i=0;i<this.machineName.length;i++) {
         console.log(this.machineName[i]);
         console.log(this.machineNum[i]);
@@ -333,7 +332,7 @@ export default defineComponent({
       this.Cal();
     },
     saveProgress() {
-      this.$router.push('./Process')
+      this.$router.push({path: '/Process', query: {params: JSON.stringify(this.machineNum)}})
     },
     resetArm() {
       this.$refs.a.resetArmer();
