@@ -1,13 +1,11 @@
 <template>
   <div id="buildProcess"></div>
   <br>
-  <br>
 
         <Row style="padding: 20px;">
         <Col span="4" offset="1">
           <p>
               请选择当前工作流程:
-
               <Select v-model="model" style="width:200px" @on-change="progressChoiceOn">
                   <Option v-for="item in progressData" :value="item.name" :key="item.name">{{ item.label }}</Option>
               </Select>
@@ -30,7 +28,7 @@
     <Row :gutter="16">
         <Col span="4" id="device-col" offset="1">
             <Collapse v-model="value" accordion>
-                <Panel name="Plate Storage">
+                <Panel name="Plate Storage" v-show="this.params[2]!=0">
                     Plate Storage
                     <template #content>
                         <draggable
@@ -50,7 +48,27 @@
                       </draggable>
                     </template>
                 </Panel>
-                <Panel name="Biomek">
+                <Panel name="LiCONiC"       v-show="this.params[1]!=0">
+                    LiCONiC
+                    <template #content>
+                        <draggable
+                            class="dragArea list-group"
+                            :list="OperationLiCONiC"
+                            :group="{ name: 'device', pull: 'clone', put: false }"
+                            @change="log"
+                            item-key="function"
+                            :sort="false"
+                        >
+                            <template #item="{ element }">
+                                <div class="list-group-item">
+                                    <p><img :src="element.picurl" class="img-device" /></p>
+                                    {{ element.function }}
+                                </div>
+                            </template>
+                      </draggable>
+                    </template>
+                </Panel>
+                <Panel name="Biomek"        v-show="this.params[3]!=0">
                     Biomek
                     <template #content>
                         <draggable
@@ -70,7 +88,47 @@
                       </draggable>
                     </template>
                 </Panel>
-                <Panel name="XPeel">
+                <Panel name="EDC"           v-show="this.params[7]!=0">
+                    EDC ATS-100
+                    <template #content>
+                        <draggable
+                            class="dragArea list-group"
+                            :list="OperationEDC"
+                            :group="{ name: 'device', pull: 'clone', put: false }"
+                            @change="log"
+                            item-key="function"
+                            :sort="false"
+                        >
+                            <template #item="{ element }">
+                                <div class="list-group-item">
+                                    <p><img :src="element.picurl" class="img-device" /></p>
+                                    {{ element.function }}
+                                </div>
+                            </template>
+                      </draggable>
+                    </template>
+                </Panel>
+                <Panel name="TMC"           v-show="this.params[6]!=0">
+                    Multidrop Combi
+                    <template #content>
+                        <draggable
+                            class="dragArea list-group"
+                            :list="OperationTMC"
+                            :group="{ name: 'device', pull: 'clone', put: false }"
+                            @change="log"
+                            item-key="function"
+                            :sort="false"
+                        >
+                            <template #item="{ element }">
+                                <div class="list-group-item">
+                                    <p><img :src="element.picurl" class="img-device" /></p>
+                                    {{ element.function }}
+                                </div>
+                            </template>
+                      </draggable>
+                    </template>
+                </Panel>
+                <Panel name="XPeel"         v-show="this.params[5]!=0">
                     XPeel
                     <template #content>
                         <draggable
@@ -90,12 +148,32 @@
                       </draggable>
                     </template>
                 </Panel>
-                <Panel name="Wasp">
+                <Panel name="Wasp"          v-show="this.params[4]!=0">
                     Wasp
                     <template #content>
                         <draggable
                             class="dragArea list-group"
                             :list="OperationWasp"
+                            :group="{ name: 'device', pull: 'clone', put: false }"
+                            @change="log"
+                            item-key="function"
+                            :sort="false"
+                        >
+                            <template #item="{ element }">
+                                <div class="list-group-item">
+                                    <p><img :src="element.picurl" class="img-device" /></p>
+                                    {{ element.function }}
+                                </div>
+                            </template>
+                      </draggable>
+                    </template>
+                </Panel>
+                <Panel name="ImageXPress"   v-show="this.params[8]!=0">
+                    ImageXPress
+                    <template #content>
+                        <draggable
+                            class="dragArea list-group"
+                            :list="OperationXPress"
                             :group="{ name: 'device', pull: 'clone', put: false }"
                             @change="log"
                             item-key="function"
@@ -116,7 +194,14 @@
         <Col span="19">
             <div id="nav">
               <Card v-for="item in displayProgress.boards" class="cards">
-                <p align="center">{{ item.name }}</p>
+                <p align="center">
+                  {{ item.name }}
+                  <Button size="small" type="primary" shape="circle" icon="md-close" @click="delBoard(displayProgress,item.name)"></Button>
+                </p>
+
+                <p align="center" style="margin: 5px">count: 
+                  <InputNumber :max="1000" :min="1" v-model="item.count" controls-outside />
+                </p>
                 <draggable
                     class="dragArea-list-group"
                     :list="item.content"
@@ -151,10 +236,16 @@ export default {
   },
   setup() {
   },
+  created() {
+    console.log("created!");
+    this.params = JSON.parse(this.$route.query.params)
+    console.log('get data as: ', this.params)
+  },
   data() {
       return {
-          progressData: [
-              { name: 'process1', label: 'Process 1', BoardCount: 1, boards: [
+          machineNum: [],
+	  progressData: [
+              { name: 'process1',  count: 1, label: 'Process 1', BoardCount: 1, boards: [
                 { name: 'board1', content:
                   [
                     { function: 'Get from Hotel', id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' },
@@ -164,7 +255,7 @@ export default {
                     { function: 'Put In Hotel',   id: 2, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' }
                   ]
                 },
-                {name: 'board2', content:
+                {name: 'board2', count: 1, content:
                   [
                     { function: 'Get from Hotel', id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOSTH.png' },
                     { function: 'Run Sequence',   id: 1, picurl: 'https://s1.ax1x.com/2023/03/18/ppJOqEQ.png' },
@@ -240,6 +331,11 @@ export default {
     },
     log: function(evt) {
       window.console.log(evt);
+    },
+    delBoard(displayProgress,name) {
+      displayProgress.boards = displayProgress.boards.filter((o) => {
+	      return o.name !== name
+	    })
     },
     scrollInit() {
  	  // 获取要绑定事件的元素
@@ -317,6 +413,7 @@ export default {
     addBoard() {
       this.displayProgress.boards.push({
         name: 'board' + (++this.displayProgress.BoardCount).toString(),
+	count: 1,
         content: [
 
         ],
@@ -331,6 +428,8 @@ export default {
     },
 
     saveProgress() {
+      console.log(this.progressData);
+      console.log(this.machineNum);
       this.$router.push('./Waiting')
     }
   },
@@ -342,15 +441,15 @@ export default {
 </script>
 
 <style lang="less" scoped>
-#buildProcess{
-  background:url("https://s1.ax1x.com/2023/04/10/ppbXwdO.jpg");
-  width:100%;
-  height:100%;
-  position:fixed;
-  background-size:100% 100%;
-  opacity: 0.3;
-  z-index: 0;
-}
+  #buildProcess{
+    background:url("https://s1.ax1x.com/2023/04/10/ppbXwdO.jpg");
+    width:100%;
+    height:100%;
+    position:fixed;
+    background-size:100% 100%;
+    opacity: 0.3;
+    z-index: 0;
+  }
   #nav {
         width: 100%;
         height: 535px;
@@ -367,14 +466,14 @@ export default {
   }
   .cards {
     width: 280px;
-    height: 510px;
+    height: 515px;
     margin-right: 10px;
 
     flex-shrink: 0;
   }
   .dragArea-list-group {
     width: 250px;
-    height: 460px;
+    height: 420px;
     margin-right: 10px;
     overflow:auto;
     flex-shrink: 0;
